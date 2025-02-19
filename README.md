@@ -18,7 +18,7 @@ cd webapp
 Create virtual environment and install required packages:
 ```
 python -m venv .venv
-source .venv/bin/activate (for Linux)
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 Run the server with:
