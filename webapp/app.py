@@ -14,12 +14,9 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    form = request.form['inputText']
-    if len(form) == 0:
-        return redirect('/')
+    form = request.form.get('inputText')
     res = inference(form)
-    session['result'] = str(res)
-    return redirect('/')
+    return jsonify({'prediction': str(res)})
 
 app.secret_key = 'your_secret_key'
 

@@ -8,25 +8,27 @@
 
 {% block body %}
 
-<h1>Comment sentiment</h1>
+<h1 style="text-align: center; margin-top: 20px;">Comment sentiment</h1>
 
-<form method="POST" action="/predict">
+<form style="max-width: 600px; margin: 0 auto;">
     <div class="mb-3">
-        <label for="input" class="form-label">Comment:</label>
-        <textarea class="form-control" name="inputText" id="input" cols="30" rows="10" placeholder="Enter your text"></textarea>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <textarea class="form-control" name="inputText" id="input" cols="30" rows="10" placeholder="Enter your text" onkeyup="success()" style="resize: none; padding: 10px;"></textarea>
+        <button type="submit" class="btn btn-primary" disabled style="margin-top: 10px; width: 100%;">Evaluate</button>
     </div>
 </form>
 
-{% if message %}
-<h4 id="Result">{{ message }}</h4>
-<div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: {{ (message|float) / 5 * 100 }}%" aria-valuenow="{{ message|float }}" aria-valuemin="0" aria-valuemax="5"></div>
+<div class="progress" style="max-width: 600px; margin: 20px auto;">
+    <div id="progressBar" class="progress-bar" role="progressbar" style="width: 100%; color: black;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Enter something</div>
 </div>
-{% else %}
-<div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5"></div>
-</div>
-{% endif %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
 
 {% endblock %}
